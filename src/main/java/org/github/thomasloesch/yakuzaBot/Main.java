@@ -45,6 +45,7 @@ public class Main {
         logger.info("Creating client with token {}", token);
 
         ArrayList<ICommand> commandRegistry = new ArrayList<>();
+        commandRegistry.add(new SimpleCommand("test"));
 
         DiscordApi api = new DiscordApiBuilder().setToken(token).login().join();
         System.out.println("Bot started!");
