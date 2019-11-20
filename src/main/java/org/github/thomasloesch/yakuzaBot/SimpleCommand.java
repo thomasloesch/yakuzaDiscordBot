@@ -1,14 +1,21 @@
 package org.github.thomasloesch.yakuzaBot;
 
+import org.github.thomasloesch.yakuzaBot.model.DiscordCommandHandler;
+import org.github.thomasloesch.yakuzaBot.view.DiscordCommandView;
+import org.github.thomasloesch.yakuzaBot.view.HandlerResult;
 import org.javacord.api.event.message.MessageCreateEvent;
 
 public class SimpleCommand implements ICommand {
     private final char COMMAND_START_CHAR = '.';
 
     private String commandName;
+    private DiscordCommandHandler commandHandler;
+    private DiscordCommandView commandViewer;
 
-    public SimpleCommand(String commandName) {
+    public SimpleCommand(String commandName, DiscordCommandHandler commandHandler, DiscordCommandView commandViewer) {
         this.commandName = commandName;
+        this.commandHandler = commandHandler;
+        this.commandViewer = commandViewer;
     }
 
     @Override
@@ -19,6 +26,7 @@ public class SimpleCommand implements ICommand {
 
     @Override
     public void accept(MessageCreateEvent commandContext) {
-        commandContext.getChannel().sendMessage("It worked!");
+        HandlerResult result = commandHandler.handle(commandContext);
+        commandViewer.view(commandContext, result);
     }
 }
