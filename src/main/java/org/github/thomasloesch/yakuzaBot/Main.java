@@ -1,6 +1,8 @@
 package org.github.thomasloesch.yakuzaBot;
 
 import org.apache.commons.cli.*;
+import org.github.thomasloesch.yakuzaBot.model.WorkCommandHandler;
+import org.github.thomasloesch.yakuzaBot.view.WorkCommandViewer;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 import org.slf4j.Logger;
@@ -44,8 +46,11 @@ public class Main {
 
         logger.info("Creating client with token {}", token);
 
+        WorkCommandHandler workHandler = new WorkCommandHandler();
+        WorkCommandViewer workViewer = new WorkCommandViewer();
+
         ArrayList<ICommand> commandRegistry = new ArrayList<>();
-        commandRegistry.add(new SimpleCommand("test"));
+        commandRegistry.add(new SimpleCommand("work", workHandler, workViewer));
 
         DiscordApi api = new DiscordApiBuilder().setToken(token).login().join();
         System.out.println("Bot started!");

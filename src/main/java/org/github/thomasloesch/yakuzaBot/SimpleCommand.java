@@ -2,7 +2,7 @@ package org.github.thomasloesch.yakuzaBot;
 
 import org.github.thomasloesch.yakuzaBot.model.DiscordCommandHandler;
 import org.github.thomasloesch.yakuzaBot.view.DiscordCommandView;
-import org.github.thomasloesch.yakuzaBot.view.HandlerResult;
+import org.github.thomasloesch.yakuzaBot.model.HandlerResult;
 import org.javacord.api.event.message.MessageCreateEvent;
 
 public class SimpleCommand implements ICommand {
@@ -21,7 +21,7 @@ public class SimpleCommand implements ICommand {
     @Override
     public boolean matchesPattern(String message) {
         String expectedValue = COMMAND_START_CHAR + commandName;
-        return message.matches(expectedValue + "*");
+        return message.matches(expectedValue + ".*");
     }
 
     @Override
