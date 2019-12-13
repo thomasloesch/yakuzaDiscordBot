@@ -39,4 +39,8 @@ public class User {
     public void setBalance(int balance) {
         this.balance = balance;
     }
+
+    public String toString() {
+        return String.format("%s, %s, %s", discordID, jobName, balance);
+    }
 }
