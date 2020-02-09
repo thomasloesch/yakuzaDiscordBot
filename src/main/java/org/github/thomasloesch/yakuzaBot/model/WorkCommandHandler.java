@@ -7,15 +7,14 @@ import java.util.ArrayList;
 
 public class WorkCommandHandler extends DiscordCommandHandler {
     private final String MESSAGE_MATCH_REGEX = ".*";
-    private final String SUCCESS_RESULT_STRING = "You have been assigned as a: ";
+    private final String SUCCESS_RESULT_FORMAT = "You have been assigned as a: %s";
 
     private ArrayList<String> possibleJobArr;
     private IUserRepository userRepository;
-    private static String REPO_FILE_LOCATION = "C:\\Users\\Thomas Loesch\\IdeaProjects\\yakuzaBot\\repoFile.csv";
 
     public WorkCommandHandler() {
         InitializeJobArr();
-        userRepository = new FileUserRepository(new File(REPO_FILE_LOCATION));
+        userRepository = RepositoryFactory.getRepositoryInstance();
     }
 
     private void InitializeJobArr() {
@@ -40,7 +39,7 @@ public class WorkCommandHandler extends DiscordCommandHandler {
                 userRepository.updateJob(userId, jobString);
             }
 
-            return new SuccessResult(jobString, SUCCESS_RESULT_STRING);
+            return new SuccessResult(SUCCESS_RESULT_FORMAT, jobString);
         }
 
         return new ErrorResult("Did not match expected input. Please try again.");

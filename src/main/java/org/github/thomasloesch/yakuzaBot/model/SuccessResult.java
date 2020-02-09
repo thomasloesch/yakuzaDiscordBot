@@ -1,21 +1,21 @@
 package org.github.thomasloesch.yakuzaBot.model;
 
 public class SuccessResult extends HandlerResult {
-    private String jobString;
+    private String format;
     private String message;
 
-    public SuccessResult(String jobString, String message) {
+    public SuccessResult(String format, String message) {
         super();
-        this.jobString = jobString;
+        this.format = format;
         this.message = message;
     }
 
-    public String getJobString() {
-        return jobString;
+    public String getFormat() {
+        return format;
     }
 
-    public void setJobString(String jobString) {
-        this.jobString = jobString;
+    public void setFormat(String format) {
+        this.format = format;
     }
 
     public String getMessage() {
@@ -28,6 +28,6 @@ public class SuccessResult extends HandlerResult {
 
     @Override
     public String getResultString() {
-        return this.message + jobString;
+        return String.format(format, message);
     }
 }

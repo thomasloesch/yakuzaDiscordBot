@@ -1,7 +1,9 @@
 package org.github.thomasloesch.yakuzaBot;
 
 import org.apache.commons.cli.*;
+import org.github.thomasloesch.yakuzaBot.model.AccountCommandHandler;
 import org.github.thomasloesch.yakuzaBot.model.WorkCommandHandler;
+import org.github.thomasloesch.yakuzaBot.view.AccountCommandViewer;
 import org.github.thomasloesch.yakuzaBot.view.WorkCommandViewer;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
@@ -49,8 +51,12 @@ public class Main {
         WorkCommandHandler workHandler = new WorkCommandHandler();
         WorkCommandViewer workViewer = new WorkCommandViewer();
 
+        AccountCommandHandler accountHandler = new AccountCommandHandler();
+        AccountCommandViewer accountViewer = new AccountCommandViewer();
+
         ArrayList<ICommand> commandRegistry = new ArrayList<>();
         commandRegistry.add(new SimpleCommand("work", workHandler, workViewer));
+        commandRegistry.add(new SimpleCommand("account", accountHandler, accountViewer));
 
         DiscordApi api = new DiscordApiBuilder().setToken(token).login().join();
         System.out.println("Bot started!");
